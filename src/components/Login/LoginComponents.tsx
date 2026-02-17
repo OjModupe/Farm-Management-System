@@ -1,21 +1,34 @@
-import Button from "../shared/Button";
+import Button from "../../shared/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import LgIm from "../assets/image 6.png";
+import LgIm from "../../assets/image 6.png";
 import { ImLeaf } from "react-icons/im";
-import { BsArrowDown } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
+import LoginModal from "./LoginModal";
 
-const LogInn = () => {
+const LoginComponents = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState("");
+  const [role, setRole] = useState("");
 
-  const navigate = useNavigate;
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
+    if (role === "Farmer") {
+      navigate("");
+    } else if (role === "Admin") {
+      navigate("");
+    } else if (role === "Manager") {
+      navigate("");
+    } else {
+      alert("Please select role");
+    }
+
     console.log(email);
     console.log(password);
 
@@ -31,7 +44,7 @@ const LogInn = () => {
       console.log("response:", response.data);
       localStorage.setItem("token", response.data.accessToken);
       toast.success("Login Successful");
-      navigate();
+      navigate("");
     } catch (error: any) {
       console.log(error);
       toast.error(error.response.data.message || "Login Failed");
@@ -85,28 +98,57 @@ const LogInn = () => {
 
                 <div className="relative">
                   <label>Login as</label>
-                  <input
-                    type="text"
-                    value={login}
-                    onChange={(e) => setLogin(e.target.value)}
-                    placeholder="Farmer"
-                    className="p-2 rounded-2xl border w-full text-gray-400 bg-green-50"
-                  />
 
-                  <IoIosArrowDown className="absolute text-2xl right-3 top-11 -translate-y-1/2 text-gray-500 pointer-events-none" />
+                  {/* Trigger Box */}
+                  <div
+                    onClick={() => setOpenModal(!openModal)}
+                    className="p-2 rounded-2xl border border-gray-400 w-full bg-green-50 flex justify-between items-center cursor-pointer"
+                  >
+                    <span className={role ? "text-black" : "text-gray-400"}>
+                      {role || "Farmer"}
+                    </span>
+
+                    <IoIosArrowDown className="text-gray-500 text-xl" />
+                  </div>
+
+                  {/* Dropdown */}
+                  {openModal && (
+                    <div className="absolute left-0 mt-2 w-full bg-white shadow-md rounded-lg z-50">
+                      {["Farmer", "Admin", "Veterinarian"].map((item) => (
+                        <div
+                          key={item}
+                          onClick={(e) => {
+                            e.stopPropagation(); // prevents parent click
+                            setRole(item);
+                            setOpenModal(false);
+                          }}
+                          className="p-2 hover:bg-gray-100 cursor-pointer"
+                        >
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className=" mt-5 flex gap-4 flex-col ">
-                  <Link to="/login">
-                    <Button
-                      text="Sign In"
-                      color="text-white"
-                      borderRadius="rounded-2xl"
-                      padding="p-3"
-                      bgColor="bg-green-900"
-                      width="w-full"
-                      onClick={handleLogin}
-                    />
+                  {/* <Link to="/login"> */}
+                  <Button
+                    text="Sign In"
+                    color="text-white"
+                    borderRadius="rounded-2xl"
+                    padding="p-3"
+                    bgColor="bg-green-900"
+                    width="w-full"
+                    onClick={handleLogin}
+                  />
+                  {/* </Link> */}
+                </div>
+
+                <div className="flex gap-2 items-center justify-center">
+                  <h1 className="text-green-900 ">Don't have an account?</h1>
+                  <Link to="/signup">
+                    <h1 className="text-green-900"> Sign up</h1>
                   </Link>
                 </div>
               </div>
@@ -115,16 +157,27 @@ const LogInn = () => {
         </div>
 
         {/* a div for the right side of the login page */}
-        <div className="bg-gray-300 basis-1/2 w-full h-full overflow-hidden hidden md:block">
+        <div className="relative bg-gray-300 basis-1/2 w-full h-full overflow-hidden hidden md:block">
           <div className=" absolute inset-0 bg-black opacity-30"></div>
-          <img
-            src={LgIm}
-            className="h-full w-full object-cover object-center "
-          />
+          <div className="">
+            <img
+              src={LgIm}
+              className="h-full w-full object-cover object-center "
+            />
+            {/* absolute bottom-0 left-0 w-full z-10 p-6 */}
+            <div className="absolute bottom-7  left-10 w-full  flex flex-col gap-2 p-6 z-10">
+              <h1 className="text-white text-xl font-bold">
+                Smart Farm Management
+              </h1>
+              <h1 className="text-white">
+                Manage your farm with AI powered insights and analytics
+              </h1>
+            </div>
+          </div>
         </div>
       </div>
     </>
   );
 };
 
-export default LogInn;
+export default LoginComponents;
