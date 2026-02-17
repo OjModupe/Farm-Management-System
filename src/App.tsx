@@ -10,6 +10,10 @@ import Tasks from "./pages/Tasks";
 import SigninComponnents from "./components/Signin/SigninComponents";
 import Users from "./pages/Users";
 import PageLayout from "./layouts/PageLayout";
+import Production from "./pages/Production";
+import Analytics from "./pages/Analytics";
+import Notification from "./pages/Notification";
+import Settings from "./pages/Settings";
 
 const App = () => {
   return (
@@ -23,6 +27,11 @@ const App = () => {
           <Route path="/crops" element={<Crops />} />
           <Route path="/equipment" element={<Equipment />} />
           <Route path="/financial" element={<Financial />} />
+          <Route path="/production" element={<Production />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/notification" element={<Notification />} />
+          <Route path="/settings" element={<Settings />} />
+
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/livestock" element={<Livestock />} />
           <Route path="/login" element={<LoginComponents />} />

@@ -29,21 +29,23 @@ const LoginComponents = () => {
       alert("Please select role");
     }
 
-    console.log(email);
+    console.log("dfghjk");
     console.log(password);
+    console.log(role);
 
     if (email === "" || password === "") {
       toast.error("Please fill all the fields");
       return;
     }
     try {
-      const response = await axios.post("https://dummyjson.com/auth/login", {
-        email,
-        password,
-      });
-      console.log("response:", response.data);
-      localStorage.setItem("token", response.data.accessToken);
-      toast.success("Login Successful");
+      //   const response = await axios.post("https://dummyjson.com/auth/login", {
+      //     email,
+      //     password,
+      //   });
+      //   console.log("response:", response.data);
+      //   localStorage.setItem("token", response.data.accessToken);
+      toast.success("Login Successfulll");
+
       navigate("");
     } catch (error: any) {
       console.log(error);
