@@ -7,7 +7,7 @@ import Inventory from "./pages/Inventory";
 import Livestock from "./pages/Livestock";
 import LoginComponents from "./components/Login/LoginComponents";
 import Tasks from "./pages/Tasks";
-import SigninComponnents from "./components/Signin/SigninComponents";
+import SigninComponnents from "./components/Signin/SignupComponents";
 import Users from "./pages/Users";
 import PageLayout from "./layouts/PageLayout";
 import Production from "./pages/Production";
@@ -34,8 +34,7 @@ const App = () => {
 
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/livestock" element={<Livestock />} />
-          <Route path="/login" element={<LoginComponents />} />
-          <Route path="/signup" element={<SigninComponnents />} />
+
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/users" element={<Users />} />
         </Route>

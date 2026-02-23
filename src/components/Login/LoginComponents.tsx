@@ -29,28 +29,12 @@ const LoginComponents = () => {
       alert("Please select role");
     }
 
+    localStorage.setItem("role", role);
+
     console.log("dfghjk");
     console.log(password);
     console.log(role);
-
-    if (email === "" || password === "") {
-      toast.error("Please fill all the fields");
-      return;
-    }
-    try {
-      //   const response = await axios.post("https://dummyjson.com/auth/login", {
-      //     email,
-      //     password,
-      //   });
-      //   console.log("response:", response.data);
-      //   localStorage.setItem("token", response.data.accessToken);
-      toast.success("Login Successfulll");
-
-      navigate("");
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.response.data.message || "Login Failed");
-    }
+    navigate("/");
   };
 
   return (
@@ -136,7 +120,7 @@ const LoginComponents = () => {
                 <div className=" mt-5 flex gap-4 flex-col ">
                   {/* <Link to="/login"> */}
                   <Button
-                    text="Sign In"
+                    text="Log In"
                     color="text-white"
                     borderRadius="rounded-2xl"
                     padding="p-3"

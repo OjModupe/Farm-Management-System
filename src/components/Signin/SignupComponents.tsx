@@ -19,47 +19,33 @@ const SigninComponnents = () => {
   const navigate = useNavigate();
 
   const handleSignup = async () => {
-    if (role === "Farmer") {
-      navigate("");
-    } else if (role === "Admin") {
-      navigate("");
-    } else if (role === "Manager") {
-      navigate("");
-    } else {
-      alert("Please select role");
-    }
+    // if (role === "Farmer") {
+    //   navigate("");
+    // } else if (role === "Admin") {
+    //   navigate("");
+    // } else if (role === "Manager") {
+    //   navigate("");
+    // } else {
+    //   alert("Please select role");
+    // }
 
     console.log(name);
     console.log(email);
     console.log(password);
     console.log(confirmPassword);
+    localStorage.setItem("role", role);
+    console.log("role set about to navigate");
+    navigate("/");
 
-    if (
-      name === "" ||
-      email === "" ||
-      password === "" ||
-      confirmPassword === ""
-    ) {
-      toast.error("Please fill all input fields");
-      return;
-    }
-
-    try {
-      const response = await axios.post("", {
-        name,
-        email,
-        password,
-        confirmPassword,
-      });
-
-      console.log("response:", response.data);
-      localStorage.setItem("token", response.data.accessToken);
-      toast.success("Signup Successful");
-      navigate("");
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.response.data.message || "Signup failed");
-    }
+    // if (
+    //   name === "" ||
+    //   email === "" ||
+    //   password === "" ||
+    //   confirmPassword === ""
+    // ) {
+    //   toast.error("Please fill all input fields");
+    //   return;
+    // }
   };
 
   return (
@@ -181,6 +167,7 @@ const SigninComponnents = () => {
               </div>
 
               <div className="mt-5 flex gap-4 flex-col">
+                {/* <Link to="/"> */}
                 <Button
                   text="Create Account"
                   color="text-white"
@@ -190,6 +177,7 @@ const SigninComponnents = () => {
                   width="w-full"
                   onClick={handleSignup}
                 />
+                {/* </Link> */}
               </div>
               <div className="flex gap-2 items-center justify-center">
                 <h1 className="text-green-900 ">Already have an account?</h1>
