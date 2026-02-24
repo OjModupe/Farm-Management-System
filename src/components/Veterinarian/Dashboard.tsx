@@ -1,12 +1,11 @@
 import React from 'react'
 
-const AiAnalyitcs = () => {
+const Dashboard = () => {
   return (
     <div>
-      
       
     </div>
   )
 }
 
-export default AiAnalyitcs
+export default Dashboard

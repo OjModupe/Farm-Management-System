@@ -9,11 +9,12 @@ import LoginComponents from "./components/Login/LoginComponents";
 import Tasks from "./pages/Tasks";
 import SigninComponnents from "./components/Signin/SignupComponents";
 import Users from "./pages/Users";
-import PageLayout from "./layouts/PageLayout";
+// import PageLayout from "./layouts/PageLayout";
 import Production from "./pages/Production";
 import Analytics from "./pages/Analytics";
 import Notification from "./pages/Notification";
 import Settings from "./pages/Settings";
+import DashboardLayout from "./layouts/DashboardLayout";
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
         <Route path="/login" element={<LoginComponents />} />
         <Route path="/signup" element={<SigninComponnents />} />
 
-        <Route element={<PageLayout />}>
+        <Route element={<DashboardLayout />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/crops" element={<Crops />} />
           <Route path="/equipment" element={<Equipment />} />

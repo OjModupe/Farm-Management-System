@@ -4,21 +4,15 @@ import { Link } from "react-router";
 import { LuHouse } from "react-icons/lu";
 import { PiPlantBold } from "react-icons/pi";
 import { LuBeef } from "react-icons/lu";
-import { AiOutlineBarChart } from "react-icons/ai";
 import { IoIosNotifications } from "react-icons/io";
-import { IoSettingsOutline } from "react-icons/io5";
 import { ImLeaf } from "react-icons/im";
 import { BsBoxSeam } from "react-icons/bs";
 import { FiTool } from "react-icons/fi";
 import { FaCalendar, FaRegUser } from "react-icons/fa";
 import { FiDollarSign } from "react-icons/fi";
 import { FaUserFriends } from "react-icons/fa";
-import AiAnalyitcs from "../pages/AiAnalyitcs";
-import AiAssistant from "../pages/AiAssistant";
-import DiseaseDetection from "../pages/DiseaseDetection";
 import { FaRegFileAlt } from "react-icons/fa";
-import Profile from "../pages/Profile";
-import Reports from "../pages/Reports";
+
 import { IoAnalytics } from "react-icons/io5";
 import { GiChestnutLeaf } from "react-icons/gi";
 import { LuMessageSquare } from "react-icons/lu";
@@ -30,6 +24,7 @@ interface SideBarRoute {
 }
 
 const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeRoute, setActiveRoute] = useState<string>("Dashboard");
   const role: any = localStorage.getItem("role");
   console.log(role);
@@ -99,31 +94,56 @@ const Sidebar = () => {
   } else {
     mainRoute = Veterinarian;
   }
+
+  const shouldCollapse = !isCollapsed;
   return (
     <>
-      <div className="h-screen w-[60vw] sm:w-[40vw]  md:w-[25vw] lg:w-[15vw] gap-2 bg-green-800 flex flex-col p-6">
+      <div
+        className={`h-screen ${shouldCollapse === true ? "w-[70px] px-2" : "w-64 "} gap-2 bg-green-800 flex flex-col p-6`}
+        onMouseEnter={() => setIsCollapsed(true)}
+        onMouseLeave={() => setIsCollapsed(false)}
+      >
         <div className="flex flex-col gap-3">
           <div className="flex gap-2 items-center">
-            <div className="text-white">
+            <div
+              className={`text-white ${shouldCollapse === true ? "text-2xl px-2" : " "}`}
+            >
               <ImLeaf />{" "}
             </div>
-            <h1 className="text-xl text-white">GreenLeaf</h1>
+            <h1
+              className={` text-xl text-white ${shouldCollapse == true ? "hidden" : "blocked"}`}
+            >
+              GreenLeaf
+            </h1>
           </div>
-          <h1 className="text-white">Smart Farm Management</h1>
+          <h1
+            className={` text-white ${shouldCollapse == true ? "hidden" : "blocked"}`}
+          >
+            Smart Farm Management
+          </h1>
         </div>
-<hr className="text-white mt-2"/>
+        <hr className="text-white mt-2" />
         <div className="pt-5">
           {mainRoute.map((item) => (
             <Link to={item.path} key={item.name}>
               <div
-                className={`p-4 ${activeRoute == item.name ? "bg-green-950 text-white rounded-lg " : " "} flex gap-3 hover:bg-green-900 mb-2 rounded-lg`}
+                className={` w-full p-4 ${activeRoute == item.name ? "bg-green-950 text-white rounded-lg " : " "} flex gap-3 hover:bg-green-900 mb-2 rounded-lg`}
                 onClick={() => setActiveRoute(item.name)}
               >
                 <div
                   className={`flex gap-2 items-center ${activeRoute === item.name ? "text-white" : "text-white"}`}
                 >
-                  {item.icon}
-                  {item.name}
+                  <div
+                    className={` ${shouldCollapse == true ? "flex items-center text-xl " : " "}`}
+                  >
+                    {item.icon}
+                  </div>
+                  <h1
+                    className={` ${shouldCollapse == true ? "hidden" : "block"}`}
+                  >
+                    {" "}
+                    {item.name}
+                  </h1>
                 </div>
               </div>
             </Link>
